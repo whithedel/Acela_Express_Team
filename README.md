@@ -1,6 +1,12 @@
 # Acela_Express_Team
 
-Team Memebers:
+Team Members:
+
+
+Whithedel Carre
 
 John
 
+Yingying
+
+Abigail Ettore
