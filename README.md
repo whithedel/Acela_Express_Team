@@ -5,7 +5,7 @@ Team Members:
 
 Whithedel Carre
 
-John
+John Russo
 
 Yingying
 
