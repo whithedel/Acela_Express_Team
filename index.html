@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Project 1</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+    <!-------------------------------- Messages will go here -------------------------------->
+            <div class="col-8" id="message-box">
+                <p>Gif messages go here</p>
+            </div>
+    <!-----------------------------Preview GIFs will go here -------------------------------->
+            <div class="col-2" id="gif-choose">
+                <p>Choose GIFs to send fron list here</p>
+            </div>
+        </div>
+        <div class="row">
+    <!--------------- text entry and other button features will go here --------------------->
+            <div class="col-10" id="entry-field">
+                <p>Enter phrase here and send/search to add GIFs to the choice column</p>
+                <form id="search-form">
+                    <label for="gif-search"><strong>Send a Message</strong></label>
+                    <input type="text" id="gif-search" /><br>
+    
+                    <input id="add-gif" type="submit" value="Find GIFtext">
+                </form>
+            </div>
+        </div>
+
+    </div>
+<!-------- Additional scripts needed, including firebase scripts will go here------->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-database.js"></script>
+
+    <script type="text/javascript" src="assets/app.js"></script>
+</body>
+</html>

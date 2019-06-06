@@ -1,0 +1,28 @@
+/* CSS styles only mean as placeholders.
+ Front end team will decide how the final product will look */
+
+#message-box {
+    min-height: 350px;
+    background-color: aquamarine;
+    margin: 5px;
+}
+
+#gif-choose {
+    min-height: 350px;
+    background-color: rgb(99, 77, 226);
+    margin: 5px;
+}
+
+#entry-field {
+    min-height: 50px;
+    background-color: antiquewhite;
+    margin: 5px;
+}
+
+.gif-bubble {
+    display: flex;
+    width: 250px;
+    margin: 2px;
+    padding: 20px;
+    background-color: goldenrod;
+}
