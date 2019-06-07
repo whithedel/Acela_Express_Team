@@ -1,12 +1,13 @@
 $(document).ready(function() {
 
+    var searchTerm;
     // This function fetches the GIFs from Tenor API 
     function testAPI(event) {
 
         event.preventDefault();
         event.stopPropagation();
 
-        var searchTerm = $("#gif-search").val().trim();
+        searchTerm = $("#gif-search").val().trim();
         var queryURL = "https://api.tenor.com/v1/search?q=" + searchTerm + "&key=YGY8YR0HQ8YW&limit=5&locale=en_US";
         // queryURLTwo is for the trivial API, deatils for it's functionality to be handled later
         var queryURLTwo = "https://opentdb.com/api.php?amount=1&difficulty=medium&type=multiple";
@@ -23,6 +24,7 @@ $(document).ready(function() {
             for (var i = 0; i < response.results.length; i++) {
                 var gifDiv = $("<div>");
                 $(gifDiv).addClass("gif-thumb");
+                $(gifDiv).attr("value", searchTerm);
                 var gifURL = response.results[i].media[0].mediumgif.url;
                 var miniGIF = $("<img>").attr({
                     src: gifURL,
@@ -52,7 +54,8 @@ $(document).ready(function() {
                                 </div>
                             </div>
         `;
-        $('#message-box').append(htmlText)
+        $('#message-box').append(htmlText);
+        $('.flip-card-back > h1').text($(this).attr("value"));
         console.log(this)
             // var gifBubble = $("<div>");
             // $(gifBubble).addClass("gif-bubble");
