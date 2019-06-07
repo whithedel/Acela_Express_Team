@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-// This function fetches the GIFs from Tenor API 
+    // This function fetches the GIFs from Tenor API 
     function testAPI(event) {
 
         event.preventDefault();
@@ -15,39 +15,58 @@ $(document).ready(function() {
             url: queryURL,
             method: "GET",
         }).then(function(response) {
-            console.log(response.results[Math.floor(Math.random()*4)].media[0].tinygif.url);
+            console.log(response.results[Math.floor(Math.random() * 4)].media[0].tinygif.url);
             $("#gif-choose").empty();
-        // 5 GIFs are chosen and appended to the GIF thumbnail preview <div>. That number 
-        // can be changed in the queryURL. Ideally, these will only be seen by the one user
-        // searching and no one else
+            // 5 GIFs are chosen and appended to the GIF thumbnail preview <div>. That number 
+            // can be changed in the queryURL. Ideally, these will only be seen by the one user
+            // searching and no one else
             for (var i = 0; i < response.results.length; i++) {
                 var gifDiv = $("<div>");
                 $(gifDiv).addClass("gif-thumb");
-                var gifURL = response.results[i].media[0].tinygif.url;
+                var gifURL = response.results[i].media[0].mediumgif.url;
                 var miniGIF = $("<img>").attr({
                     src: gifURL,
                     width: "100px"
                 });
                 gifDiv.append(miniGIF);
-                $("#gif-choose").prepend(gifDiv);        
+                $("#gif-choose").prepend(gifDiv);
             }
-            
+
         })
 
     };
 
-// This function adds a selected GIF from the thumbnail column to the message box to be seen
-// By all members of the chat.
+    // This function adds a selected GIF from the thumbnail column to the message box to be seen
+    // By all members of the chat.
     function sendGIF(event) {
-        
-        event.preventDefault();
-        var gifBubble = $("<div>");
-        $(gifBubble).addClass("gif-bubble");
-        $(gifBubble).append(this);
-        $("#message-box").append(gifBubble);
-        $(".gif-bubble > .gif-thumb > img").attr("width", "200px");
 
+        event.preventDefault();
+        var htmlText = `    <div class="flip-card">
+                                <div class="flip-card-inner">
+                                    <div class="flip-card-front">
+                                        ${$(this).first().prop('outerHTML')}
+                                    </div>
+                                    <div class="flip-card-back">
+                                        <h1> Im the back</h1>
+                                    </div>
+                                </div>
+                            </div>
+        `;
+        $('#message-box').append(htmlText)
+        console.log(this)
+            // var gifBubble = $("<div>");
+            // $(gifBubble).addClass("gif-bubble");
+            // $(gifBubble).append(this);
+            // $(".giphyImg").append(gifBubble);
+        $(" .gif-thumb > img").attr("width", "100%");
+        autoScroll();
     };
+
+    function autoScroll() {
+        var messageBox = '#message-box'
+        $(messageBox).animate({ scrollTop: $(messageBox)[0].scrollHeight * 10 }, 100);
+
+    }
 
     $(document).on("click", "#add-gif", testAPI);
     $(document).on("click", ".gif-thumb", sendGIF);
