@@ -73,3 +73,27 @@
     color: rgb(255, 2, 2);
     transform: rotateY(180deg);
 }
+form.jumbotron{
+    background-image: url('https://media.giphy.com/media/fX7odl0eM6X28/giphy.gif');
+    background-size: cover;
+    position: fixed;
+    height: 100vh;
+    padding:10px;
+    margin:10px;
+    width: 80%;
+    font-family: 'American Typewriter, serif';
+}
+#userLogSection{
+    color: white;
+    font-size: 26px;
+
+}
+#signUpBtn{
+    background-color: white;
+    opacity: 0.5;
+    width: 100%;
+    font-size: 18px;
+    font-family: 'American Typewriter, serif';
+
+
+}
