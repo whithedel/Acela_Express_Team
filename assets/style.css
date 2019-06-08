@@ -78,14 +78,13 @@ form.jumbotron{
     background-size: cover;
     position: fixed;
     height: 100vh;
-    /* padding:10px; */
-    /* margin:10px; */
     width: 97%;
     font-family: 'American Typewriter, serif';
 }
 #userLogSection{
     color: white;
     font-size: 26px;
+
 
 }
 #signUpBtn{
