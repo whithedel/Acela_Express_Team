@@ -12,10 +12,7 @@
     <link rel="stylesheet" type="text/css" href="assets/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    </head>
+</head>
 
 <body>
     <div class="container-fluid">
@@ -145,26 +142,22 @@
             <!-------------------------------- Messages will go here -------------------------------->
             <div class="col-8 overflow-auto card" id="message-box">
                 <p>Gif messages go here</p>
-                <div class="col-10 fixed-bottom" id="entry-field">
-                    <p>Enter phrase here and send/search to add GIFs to the choice column</p>
-                    <form id="search-form">
-                        <label for="gif-search"><strong>Send a Message</strong></label>
-                        <input type="text" id="gif-search" /><br>
-    
-                        <input id="add-gif" type="submit" value="Find GIFtext">
-                    </form>
-                </div>
                 <!-- <div class="row">
                     <div class="col-10 " id="entry-field">
                         <p>Enter phrase here and send/search to add GIFs to the choice column</p>
                         <form id="search-form">
                             <label for="gif-search"><strong>Send a Message</strong></label>
                             <input type="text" id="gif-search" /><br>
+
                             <input id="add-gif" type="submit" value="Find GIFtext">
                         </form>
                     </div>
                 </div> -->
             </div>
+            <!---ADDED: new pages for private chats-------------------------------------------------->
+            <div class="chat-room col-8 overflow-auto card" value="chat-1" style="display: none;"></div>
+            <div class="chat-room col-8 overflow-auto card" value="chat-2" style="display: none;"></div>
+            <div class="chat-room col-8 overflow-auto card" value="chat-3" style="display: none;"></div>
             <!-----------------------------Preview GIFs will go here -------------------------------->
             <div class="col-2 card" id="gif-choose">
                 <p>Choose GIFs to send fron list here</p>
@@ -172,34 +165,46 @@
         </div>
 
         <!--------------- text entry and other button features will go here --------------------->
-        
-        <!--------------- text entry and other button features will go here --------------------->
+        <div class="row">
+            <div class="col-12" id="entry-field">
+                <p>Enter phrase here and send/search to add GIFs to the choice column</p>
+                <form id="search-form">
+                    <label for="gif-search"><strong>Send a Message</strong></label>
+                    <input type="text" id="gif-search" /><br>
 
-        
-    <!-------- Additional scripts needed, including firebase scripts will go here------->
-    <script type="text/javascript" src="assets/app.js"></script>
+                    <input id="add-gif" type="submit" value="Find GIFtext">
+                <!-----ADDED: Question buttion-------------------------------->
+                    <input id="add-qtn" type="submit" value="Pop Quiz!">
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <!--CHANGED FOR TESTING: Using new first and second link below-->
 
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyAA3W5qK75FPWcT6xt-KqjGPBWIXDLUH7o",
+          authDomain: "projectonetest-c7799.firebaseapp.com",
+          databaseURL: "https://projectonetest-c7799.firebaseio.com",
+          projectId: "projectonetest-c7799",
+          storageBucket: "projectonetest-c7799.appspot.com",
+          messagingSenderId: "441008781495",
+          appId: "1:441008781495:web:cb4db68eae645c7b"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-performance.js"></script>
-
-    <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyDOJvTCcUZzEuqcxfRYKEZnI6O4yE3bK0Y",
-            authDomain: "giphy-messenger.firebaseapp.com",
-            databaseURL: "https://giphy-messenger.firebaseio.com",
-            projectId: "giphy-messenger",
-            storageBucket: "giphy-messenger.appspot.com",
-            messagingSenderId: "364972542348",
-            appId: "1:364972542348:web:824ee9fa42e36fa3"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -207,6 +212,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script type="text/javascript" src="assets/app.js"></script>
 
 
 </body>

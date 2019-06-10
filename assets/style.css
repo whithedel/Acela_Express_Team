@@ -4,26 +4,31 @@
 #currentUser {
     min-height: 575px;
 }
+/*ADDED: extra rules for chat-room div elements*/
+#message-box,
+.chat-room {
+    max-height: 575px;
+}
 
 #message-box {
     background-color: aquamarine;
-    float: left;
-    width:50%;
 }
 
+.chat-room {
+    background-color: rgb(127, 204, 255); 
+}
+
+/*ADDED: tweaks to gif thumbnail display*/
 #gif-choose {
+    min-height: 575px;
+    padding-top: 50px;
     background-color: rgb(99, 77, 226);
-    float: right;
 }
 
 #entry-field {
     min-height: 50px;
-    width: 500px;
     background-color: antiquewhite;
     margin: 5px;
-    float: right;
-    position: absolute;
-    bottom: 10;
 }
 
 .gif-bubble {
@@ -68,6 +73,14 @@
     backface-visibility: hidden;
 }
 
+/* ADDED: margins to all the cards so posts don't overlap*/
+.flip-card,
+.flip-card-front,
+.flip-card-back,
+.flip-card-inner {
+    margin: 5px;
+}
+
 .flip-card-front {
     background-color: rgba(255, 255, 255, 0);
     color: black;
@@ -101,10 +114,4 @@ div.form-group{
     width: 100%;
     font-size: 18px;
     font-family: 'American Typewriter, serif';
-}
-.form-control{
-    opacity: 0.5;
-}
-label{
-    font-weight: 100;
 }
