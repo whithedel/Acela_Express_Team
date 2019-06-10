@@ -1,71 +1,63 @@
 $(document).ready(function() {
-
+    
+    // initialize Firebase
+    initFirebaseAuth();
+ 
+   
     var searchTerm;
     // This function fetches the GIFs from Tenor API 
+    $('#input-msg').on('change', function(e)
+    {
+        if($(this).val() == '') return;
+        $('.imagetmp').css("display", "block");
+        testAPI(e);
+    });
+
+    $('#input-msg').on('click', function(e)
+    {
+        if($(this).val() == '') return;
+        $('.imagetmp').css("display", "block");
+        testAPI(e);
+    });
+
+
+    $('#msg-content').on('click', function()
+    {
+        $('.imagetmp').css("display", "none");
+    });
+
     function testAPI(event) {
 
         event.preventDefault();
         event.stopPropagation();
 
-        searchTerm = $("#gif-search").val().trim();
+        var searchTerm = $("#input-msg").val().trim();
         var queryURL = "https://api.tenor.com/v1/search?q=" + searchTerm + "&key=YGY8YR0HQ8YW&limit=5&locale=en_US";
+        // queryURLTwo is for the trivial API, deatils for it's functionality to be handled later
+        var queryURLTwo = "https://opentdb.com/api.php?amount=1&difficulty=medium&type=multiple";
 
         $.ajax({
             url: queryURL,
             method: "GET",
         }).then(function(response) {
+            if (!$('.imagetmp').is(':visible')) 
+            {
+                $('.imagetmp').css("display", "block");
+            }
             console.log(response.results[Math.floor(Math.random() * 4)].media[0].tinygif.url);
-            $("#gif-choose").empty();
-            // 5 GIFs are chosen and appended to the GIF thumbnail preview <div>. That number 
-            // can be changed in the queryURL. Ideally, these will only be seen by the one user
-            // searching and no one else
+            console.log(response.results);
+             $("#reviewImg").empty();
             for (var i = 0; i < response.results.length; i++) {
-                var gifDiv = $("<div>");
-                $(gifDiv).addClass("gif-thumb");
-                $(gifDiv).attr("value", searchTerm);
                 var gifURL = response.results[i].media[0].mediumgif.url;
-                var miniGIF = $("<img>").attr({
-                    src: gifURL,
-                    width: "100px"
-                });
-                gifDiv.append(miniGIF);
-                $("#gif-choose").prepend(gifDiv);
+                var fileName = response.results[i].id;                
+                $('#reviewImg').append('<img class=\'img-item\'  src="' + gifURL + '" data-idx="' + fileName + '" onclick=\'javascript:sendGIF(this)\' />');
             }
 
         })
-
     };
-    //ADDED: function for asking question from Trivia Database API
-    function popQuiz(event) {
 
-        event.preventDefault();
-        event.stopPropagation();
-
-        // queryURLTwo is for the trivia API
-        var queryURLTwo = "https://opentdb.com/api.php?amount=1&difficulty=medium&type=boolean";
-        $.ajax({
-            url: queryURLTwo,
-            method: "GET"
-        }).then(function(trivia) {
-            
-            console.log(trivia.results[0].question);
-            var trueFalse = '<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><h3>'
-            + userTag + ' asks:</h3><p>' + trivia.results[0].question 
-            + '</p></div><div class="flip-card-back"><h2 class="guess-true">True</h2><h2 class="guess-false">False</h2></div></div></div>';
-
-            firebase.database().ref("messageBox").push({
-                question: trueFalse,
-                right: trivia.results[0].correct_answer,
-                correct: false,
-                incorrect: false
-            });
-            
-        })
-    }
-
-    // initialize Firebase
-    initFirebaseAuth();
- 
+    
+  
     //handles signin on click function
      $('#loginBtn').on('click',signIn)
  
@@ -74,63 +66,14 @@ $(document).ready(function() {
  
      //handles submit buttons
      $('#signUpBtn').on('click', handlesignUpBtnClick)
+    // This function adds a selected GIF from the thumbnail column to the message box to be seen
+    // By all members of the chat.
     
-    //CHANGED FOR TESTING: sendGIF function to be split into two parts, also added
-    // .picked-gif class to the GIFs chosen and now the height is set at 100%
-    // to address overflowing images. Also, htmlText rearranged and edited, still works
-    function sendGIF(event) {
-
-        event.preventDefault();
-        $(this).addClass("picked-gif");
-        $(".picked-gif > img").removeAttr("width");
-        $(".picked-gif > img").attr("height", "100%");
-        var htmlText = '<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">' 
-        + $(this).first().prop('outerHTML') + '</div><div class="flip-card-back"><h1>' 
-        + userTag + ' says:</h1><h1>' + $(this).attr("value") + '</h1></div></div></div>';
-
-        firebase.database().ref("messageBox").push(htmlText);
-
-        $(this).remove();
-        autoScroll();
-                                        
-    };
-
-    function autoScroll() {
-        var messageBox = '#message-box'
-        $(messageBox).animate({ scrollTop: $(messageBox)[0].scrollHeight * 10 }, 100);
-
-    }
-
-    $(document).on("click", "#add-gif", testAPI);
-    $(document).on("click", ".gif-thumb", sendGIF);
-    //ADDED: listener for Pop Quiz button
-    $(document).on("click", "#add-qtn", popQuiz);
-
+    // $(document).on("click", "#add-gif", testAPI);
+    // $(document).on("click", ".gif-thumb", sendGIF);
 
 });
 
-//ADDED: userTag undefined here, gets defined under handlesignUpBtnClick() and signIn()
-var userTag;
-
-//ADDED: second part of sendGIF, using firebase. Had to copy/paste autoScroll() here due to scope issues
-firebase.database().ref("messageBox").on("child_added", function(snapshot) {
-    var messageBox = '#message-box'
-    console.log(snapshot.val());
-    $('#message-box').append(snapshot.val());
-        // var gifBubble = $("<div>");
-        // $(gifBubble).addClass("gif-bubble");
-        // $(gifBubble).append(this);
-        // $(".giphyImg").append(gifBubble);
-    $(messageBox).animate({ scrollTop: $(messageBox)[0].scrollHeight * 10 }, 100);
-    
-});
-//ADDED: second part of popQuiz function, appends question to message box
-firebase.database().ref("messageBox").on("child_added", function(questionSnapshot) {
-    var messageBox = '#message-box'
-    console.log(questionSnapshot.val().question);
-    $('#message-box').append(questionSnapshot.val().question);
-    $('#message-box').animate({ scrollTop: $(messageBox)[0].scrollHeight * 10 }, 100);
-});
 
 //function to handlesignUpBtnClick
 function handlesignUpBtnClick() {
@@ -147,9 +90,6 @@ function handlesignUpBtnClick() {
             alertMessage(errorMessage);
           });
     }
-    //ADDED: capture string of user email to use as userTag plus add name to firebase;
-    userTag = email.substring(0, email.indexOf('@'));
-    firebase.database().ref("users").push(userTag);
 }
 
 //function to handle the form and verify if the form filled properly or not 
@@ -189,8 +129,6 @@ function signIn(){
         // ...
       });
     //   $('#loginDropdown').hide();
-    //ADDED: capture string of user email to use as userTag
-    userTag = email.substring(0, email.indexOf('@'));
 }
 
 //function that allows users to be able to sign out
@@ -215,6 +153,7 @@ function authStateObserver(user) {
     $('#logoutBtn').show();
     $('#loginDropdown').hide();
     $('#dropdownMenu1').hide();
+    $('#input-msg').focus();
     } else {
     // No user is signed in. user is signout
     }
@@ -231,3 +170,24 @@ function alertMessage(errorMessage){
     $('#alertMessage').html(errorMessage)
     $('#alertMessage').show();
 }
+
+function sendGIF(item) {
+    var src = $(item).attr('src');
+    var imgtag = '<img class="img-msg-item" src="' + src + '" />';
+    var htmlText = '<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">' + 
+                                    imgtag
+                                + '</div><div class="flip-card-back"><h1> Im the back</h1></div></div></div>';
+    $('#message-box').append(htmlText);
+    autoScroll();
+    };
+
+    function autoScroll() {
+        setTimeout(function() {
+            var cc = $('#msg-content');
+            var dd = cc[0].scrollHeight;
+            cc.animate({
+                scrollTop: dd
+            }, 500);
+        }, 1000);
+    }
+

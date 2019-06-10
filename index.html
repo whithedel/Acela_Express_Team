@@ -7,14 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Project 1</title>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="assets/style.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 
 <body>
+    <div class="bg-layer" id="bg-layer">
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -45,7 +44,7 @@
                                         <li class="px-3 py-2">
                                             <form class="form" role="form">
                                                 <div class="form-group">
-                                                    <input id="emailInput" placeholder="Email"
+                                                    <input id="emailInput" placeholder="Username"
                                                         class="form-control form-control-sm" type="text" required="">
                                                 </div>
                                                 <div class="form-group">
@@ -74,7 +73,7 @@
                 <div id="modalPassword" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog">
-                        <div class="modal-content">
+                        <div class="modal-content modal-color">
                             <div class="modal-header">
                                 <h3>Forgot password</h3>
                                 <button type="button" class="close font-weight-light" data-dismiss="modal"
@@ -100,111 +99,124 @@
 
         <div class="row">
             <div class="col-12">
-                <form class="jumbotron ">
+                <form class="jumbotron">
+                    <h2 for="newUser" id="txtsignup">Sign Up</h2>
                     <div class="alert alert-danger" id="alertMessage" role="alert" style="display: none;">
-                    </div>
+                    </div>                    
+                    <img src="assets/bg/user_start.jpg" class="heading-avatar-icon" />
                     <div class="form-group">
-                            <label for="newUser">Sign Up</label>
-                    <div class="form-group">
-                        <label for="userName"> Create Username</label>
+                        <!-- <label for="userName"> Create Username</label> -->
                         <input type="text" class="form-control" id="userName" placeholder="Enter Username">
                         <small id="username" class="form-text text-muted">We'll never share your username with anyone
                             else.</small>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword1">Create Password</label>
+                        <!-- <label for="inputPassword1">Create Password</label> -->
                         <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
-                        <label for="inputPassword2">Confirm Password</label>
+                        <!-- <label for="inputPassword2">Confirm Password</label> -->
                         <input type="password" class="form-control" id="inputPassword2" placeholder="Confirm Password">
-                        <br>
-                    <button type="submit" class="btn" id="signUpBtn">Login</button>
-                </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="signUpBtn">Login</button>
                 </form>
             </div>
             </div>
         </div>
     </div>
 
-    <div class="container-fluid" id="midSection" style="display: none;">
-        <!-------------------------------- Users will go here -------------------------------->
-        <div class="row">
-            <div class="col-2 bg-primary card" id="currentUser">
-                <!-- <p>Search Username to start a conversation</p> -->
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Recipient's username"
-                        aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
-                    </div>
+    <div class="container" id="midSection" style="display: none;">
+    <div class="messaging">
+      <div class="inbox_msg">
+        <div class="inbox_people">
+          <div class="headind_srch">
+            <div class="recent_heading">
+              <h4 id="users">&nbsp;</h4>
+            </div>
+            <div class="srch_bar">
+              <div class="stylish-input-group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>                
+                <input type="text" class="search-bar" id="search-user"  placeholder="Search" >
+                <span class="input-group-addon">
+                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                </span> </div>
+            </div>
+          </div>
+          <div class="inbox_chat">
+            <div class="chat_list active_chat">
+              <div class="chat_people">
+                <div class="chat_img"> <img src="assets/bg/img_avatar.png" alt="sunil"> </div>
+                <div class="chat_ib">
+                  <h5>Jacky <span class="chat_date">Dec 25</span></h5>
+                  <p>....</p>
                 </div>
-                <p>Users go here</p>
+              </div>
             </div>
-            <!-------------------------------- Messages will go here -------------------------------->
-            <div class="col-8 overflow-auto card" id="message-box">
-                <p>Gif messages go here</p>
-                <!-- <div class="row">
-                    <div class="col-10 " id="entry-field">
-                        <p>Enter phrase here and send/search to add GIFs to the choice column</p>
-                        <form id="search-form">
-                            <label for="gif-search"><strong>Send a Message</strong></label>
-                            <input type="text" id="gif-search" /><br>
-
-                            <input id="add-gif" type="submit" value="Find GIFtext">
-                        </form>
-                    </div>
-                </div> -->
+            <div class="chat_list">
+              <div class="chat_people">
+                <div class="chat_img"> <img src="assets/bg/img_avatar.png" alt="sunil"> </div>
+                <div class="chat_ib">
+                  <h5>Devid <span class="chat_date">Dec 25</span></h5>
+                  <p>...</p>
+                </div>
+              </div>
             </div>
-            <!---ADDED: new pages for private chats-------------------------------------------------->
-            <div class="chat-room col-8 overflow-auto card" value="chat-1" style="display: none;"></div>
-            <div class="chat-room col-8 overflow-auto card" value="chat-2" style="display: none;"></div>
-            <div class="chat-room col-8 overflow-auto card" value="chat-3" style="display: none;"></div>
-            <!-----------------------------Preview GIFs will go here -------------------------------->
-            <div class="col-2 card" id="gif-choose">
-                <p>Choose GIFs to send fron list here</p>
+            <div class="chat_list">
+              <div class="chat_people">
+                <div class="chat_img"> <img src="assets/bg/img_avatar.png" alt="sunil"> </div>
+                <div class="chat_ib">
+                  <h5>Join Deo  <span class="chat_date">Dec 25</span></h5>
+                  <p>...</p>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-
-        <!--------------- text entry and other button features will go here --------------------->
-        <div class="row">
-            <div class="col-12" id="entry-field">
-                <p>Enter phrase here and send/search to add GIFs to the choice column</p>
-                <form id="search-form">
-                    <label for="gif-search"><strong>Send a Message</strong></label>
-                    <input type="text" id="gif-search" /><br>
-
-                    <input id="add-gif" type="submit" value="Find GIFtext">
-                <!-----ADDED: Question buttion-------------------------------->
-                    <input id="add-qtn" type="submit" value="Pop Quiz!">
-                </form>
+        <div class="mesgs">
+          <div class="msg_history" id="msg-content">
+            <div class="incoming_msg">
+              <div class="received_msg">
+                <div class="received_withd_msg" id="message-box">
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="imagetmp">
+            <div id="reviewImg">
+            </div>
+         </div>
+          <div class="type_msg">
+            <div class="input_msg_write">
+              <input type="text" class="write_msg" placeholder="Type a keyword..." id="input-msg"/>
+            </div>
+          </div>
         </div>
-
+      </div>
     </div>
-
-    <!--CHANGED FOR TESTING: Using new first and second link below-->
+    <!-------- Additional scripts needed, including firebase scripts will go here------->
+    <script type="text/javascript" src="assets/app.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
-
-    <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-          apiKey: "AIzaSyAA3W5qK75FPWcT6xt-KqjGPBWIXDLUH7o",
-          authDomain: "projectonetest-c7799.firebaseapp.com",
-          databaseURL: "https://projectonetest-c7799.firebaseio.com",
-          projectId: "projectonetest-c7799",
-          storageBucket: "projectonetest-c7799.appspot.com",
-          messagingSenderId: "441008781495",
-          appId: "1:441008781495:web:cb4db68eae645c7b"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-    </script>
-
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-performance.js"></script>
+
+    <script>
+        $('#userName').focus();
+
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDOJvTCcUZzEuqcxfRYKEZnI6O4yE3bK0Y",
+            authDomain: "giphy-messenger.firebaseapp.com",
+            databaseURL: "https://giphy-messenger.firebaseio.com",
+            projectId: "giphy-messenger",
+            storageBucket: "giphy-messenger.appspot.com",
+            messagingSenderId: "364972542348",
+            appId: "1:364972542348:web:824ee9fa42e36fa3"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
@@ -212,7 +224,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script type="text/javascript" src="assets/app.js"></script>
 
 
 </body>
