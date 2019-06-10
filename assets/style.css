@@ -6,19 +6,24 @@
 }
 
 #message-box {
-    max-height: 575px;
     background-color: aquamarine;
+    float: left;
+    width:50%;
 }
 
 #gif-choose {
-    min-height: 575px;
     background-color: rgb(99, 77, 226);
+    float: right;
 }
 
 #entry-field {
     min-height: 50px;
+    width: 500px;
     background-color: antiquewhite;
     margin: 5px;
+    float: right;
+    position: absolute;
+    bottom: 10;
 }
 
 .gif-bubble {
@@ -96,4 +101,10 @@ div.form-group{
     width: 100%;
     font-size: 18px;
     font-family: 'American Typewriter, serif';
+}
+.form-control{
+    opacity: 0.5;
+}
+label{
+    font-weight: 100;
 }

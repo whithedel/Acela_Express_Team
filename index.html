@@ -12,7 +12,10 @@
     <link rel="stylesheet" type="text/css" href="assets/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-</head>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    </head>
 
 <body>
     <div class="container-fluid">
@@ -142,13 +145,21 @@
             <!-------------------------------- Messages will go here -------------------------------->
             <div class="col-8 overflow-auto card" id="message-box">
                 <p>Gif messages go here</p>
+                <div class="col-10 fixed-bottom" id="entry-field">
+                    <p>Enter phrase here and send/search to add GIFs to the choice column</p>
+                    <form id="search-form">
+                        <label for="gif-search"><strong>Send a Message</strong></label>
+                        <input type="text" id="gif-search" /><br>
+    
+                        <input id="add-gif" type="submit" value="Find GIFtext">
+                    </form>
+                </div>
                 <!-- <div class="row">
                     <div class="col-10 " id="entry-field">
                         <p>Enter phrase here and send/search to add GIFs to the choice column</p>
                         <form id="search-form">
                             <label for="gif-search"><strong>Send a Message</strong></label>
                             <input type="text" id="gif-search" /><br>
-
                             <input id="add-gif" type="submit" value="Find GIFtext">
                         </form>
                     </div>
@@ -161,19 +172,10 @@
         </div>
 
         <!--------------- text entry and other button features will go here --------------------->
-        <div class="row">
-            <div class="col-10" id="entry-field">
-                <p>Enter phrase here and send/search to add GIFs to the choice column</p>
-                <form id="search-form">
-                    <label for="gif-search"><strong>Send a Message</strong></label>
-                    <input type="text" id="gif-search" /><br>
+        
+        <!--------------- text entry and other button features will go here --------------------->
 
-                    <input id="add-gif" type="submit" value="Find GIFtext">
-                </form>
-            </div>
-        </div>
-
-    </div>
+        
     <!-------- Additional scripts needed, including firebase scripts will go here------->
     <script type="text/javascript" src="assets/app.js"></script>
 
