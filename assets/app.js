@@ -69,12 +69,14 @@ $(document).ready(function () {
     // $(document).on("click", ".gif-thumb", sendGIF);
 
 });
+ // Made userName a global variable for message on back of GIFs
 
+ var userName;
 
 //function to handlesignUpBtnClick
 function handlesignUpBtnClick() {
     event.preventDefault()
-    var userName = $('#userName').val().trim();
+    userName = $('#userName').val().trim();
     var email = userName + '@rhahekel.com';
     var password = $('#inputPassword1').val().trim();
     var password2 = $('#inputPassword2').val().trim();
@@ -128,6 +130,7 @@ function validateForm(userName, password, password2) {
 //function that allows users to be able to sign in 
 function signIn() {
     event.preventDefault()
+    userName = $('#emailInput').val().trim();
     var email = $('#emailInput').val().trim() + '@rhahekel.com';
     var password = $('#passwordInput').val().trim();
     console.log(email)
@@ -208,16 +211,29 @@ function displayUserAvailable(user) {
     })
 };
 
-
+// Appending GIFs to page now set-up as two functions: One puts the GIf chosen into the Modal for message input,
+// then the second function occurs when you click on the Send Message button in the modal 
 function sendGIF(item) {
     var src = $(item).attr('src');
     var imgtag = '<img class="img-msg-item" src="' + src + '" />';
     var htmlText = '<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">' +
         imgtag
-        + '</div><div class="flip-card-back"><h1> Im the back</h1></div></div></div>';
-    $('#message-box').append(htmlText);
-    autoScroll();
+        + '</div><div class="flip-card-back"><h3>...</h3></div></div></div>';
+    $('#gifModal').modal('show');
+    $('#gif-preview').html(htmlText);
 };
+
+$(document).on("click", "#append-gif", function appendGIF() {
+    var hiddenMsg = $("#gif-message-text").val();
+    var gifMsg = $("#gif-preview > .flip-card");
+    $("#gif-preview").find("h3").text(userName + " says:");
+    $("#gif-preview").find(".flip-card-back").append("<p style='color: rgb(249, 255, 0); background-color: #2980b9;'>" + hiddenMsg + "</p>");
+    $("#message-box").append(gifMsg);
+    $("#gif-message-text").val("");
+    $('#gifModal').modal('hide');
+
+    autoScroll();
+})
 
 function autoScroll() {
     setTimeout(function () {
