@@ -384,3 +384,136 @@ img{ max-width:100%;border-radius: 50%;}
     opacity: 0.7;
     transition: 0.3s;
 } 
+
+
+
+
+
+
+
+
+
+
+
+@media (max-height: 805px) {
+
+    .messaging { 
+        left:10%;
+        margin-top:60px; 
+        padding: 0 0 0 0;
+        position: fixed;
+        width: 80%;
+        border-width: 0px;
+        background-color: rgba(24, 26, 27, 0.04);
+        box-shadow: rgba(0, 0, 0, 5) -1px 4px 40px 0px;
+    }
+    
+    .inbox_msg {
+      border: 1px solid #c4c4c4;
+      clear: both;
+      overflow: hidden;
+      height: 500px;
+      background-color:  rgba(24, 26, 27, 0.04);
+    }
+
+    .inbox_chat { 
+      height: 450px; 
+      overflow-y: auto;
+      cursor: pointer;
+      
+    }
+    .img-msg-item
+    {
+        width: 200px;
+        height: 150px;
+        border-radius: 15px;
+        box-shadow: 0 1px 0.5px #231b1b;
+        cursor: pointer;
+        padding: 8px 8px 8px 8px !important;
+    }
+
+    .img-item
+    {
+        width: 100px;
+        height: 80px;
+        border-radius: 10px;
+        box-shadow: 0 1px 0.5px #231b1b;
+        cursor: pointer;
+        padding: 5px 5px 5px 5px !important;
+        opacity: 0.7;
+        transition: 0.3s;
+    }    
+    .imagetmp {
+      width: 64.5%;
+      height: 100px;
+      position: absolute;
+      bottom: 49px;
+      background: rgb(51, 51, 54);
+      display: none;
+      padding: 10px 5px 5px 10px !important;
+      margin: 0 !important;
+      z-index: 1000;
+      scroll-behavior: none;
+      overflow-y: hidden;
+      overflow-x: hidden;
+      -ms-overflow-x: hidden;
+      -ms-overflow-y: hidden;
+    }
+    .inbox_people {
+      background:#333336 none repeat scroll 0 0;
+      float: left;
+      overflow: hidden;
+      width: 30%; border-right:1px solid #c4c4c4;
+      margin-top: 360px;
+    }
+
+    .msg_history {
+        margin-top: 337px;
+        overflow-y: auto;
+        height: 449px;
+    }
+    .flip-card {
+        background-color: transparent;
+        width: 200px;
+        height: 150px;
+        padding: 5px;
+        margin-top: 20px; 
+    }
+    .flip-card-back {
+        background-color: #2980b9;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 1px 0.5px #231b1b;
+        cursor: pointer;
+        opacity: 0.9;
+        color: rgb(249, 255, 0);
+        padding: 8px 8px 8px 8px !important;
+        width: 200px;
+        height: 150px;
+        transform: rotateY(180deg);
+    }
+
+    .bg-layer {
+      background-color: rgba(0, 0, 0, 0.7);
+      background-image: none;
+      position: relative; 
+      min-height: 105vh;
+    }
+}
+
+@media (max-width: 500px) {
+  form.jumbotron{
+    top:20%;
+    right: 0px;
+    margin: 0px auto;   
+    width: 90%;
+    position: relative; 
+    background-color: rgba(24, 26, 27, 0.04);
+    box-shadow: rgba(0, 0, 0, 0.75) -1px 4px 28px 0px;
+    border-radius: 0px;
+  }
+ 
+
+
+} 
+  
