@@ -14,216 +14,208 @@
 
 <body>
     <div class="bg-layer" id="bg-layer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
-                    <div class="container">
-                        <a class="navbar-brand" href="#">GiffyChat</a>
-                        <button class="navbar-toggler border-0" type="button" data-toggle="collapse"
-                            data-target="#exCollapsingNavbar">
-                            &#9776;
-                        </button>
-                        <div class="collapse navbar-collapse" id="exCollapsingNavbar">
-                            <ul class="nav navbar-nav">
-                                <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link">Service</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link">More</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
-                                <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i
-                                            class="fa fa-cog fa-fw fa-lg"></i></a></li>
-                                <li class="dropdown order-1">
-                                    <button type="button" id="dropdownMenu1" data-toggle="dropdown"
-                                        class="btn btn-outline-secondary dropdown-toggle">Login<span
-                                            class="caret"></span></button>
-                                    <button id="logoutBtn" type="submit" class="btn btn-outline-secondary"
-                                        style="display: none;">Logout</button>
-                                    <ul class="dropdown-menu dropdown-menu-right mt-2" id="loginDropdown">
-                                        <li class="px-3 py-2">
-                                            <form class="form" role="form">
-                                                <div class="form-group">
-                                                    <input id="emailInput" placeholder="Username"
-                                                        class="form-control form-control-sm" type="text" required="">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input id="passwordInput" placeholder="Password"
-                                                        class="form-control form-control-sm" type="password"
-                                                        required="">
-                                                </div>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary btn-block"
-                                                        id="loginBtn">Login</button>
-                                                </div>
-                                                <div class="form-group text-center">
-                                                    <small><a href="#" data-toggle="modal"
-                                                            data-target="#modalPassword">Forgot
-                                                            password?</a></small>
-                                                </div>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" role="navigation">
+                        <div class="container">
+                            <a class="navbar-brand" href="#">GiffyChat</a>
+                            <button class="navbar-toggler border-0" type="button" data-toggle="collapse"
+                                data-target="#exCollapsingNavbar">
+                                &#9776;
+                            </button>
+                            <div class="collapse navbar-collapse" id="exCollapsingNavbar">
+                                <ul class="nav navbar-nav">
+                                    <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link">Link</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link">Service</a></li>
+                                    <li class="nav-item"><a href="#" class="nav-link">More</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+                                    <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link"
+                                            title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
+                                    <li class="dropdown order-1">
+                                        <button type="button" id="dropdownMenu1" data-toggle="dropdown"
+                                            class="btn btn-outline-secondary dropdown-toggle">Login<span
+                                                class="caret"></span></button>
+                                        <button id="logoutBtn" type="submit" class="btn btn-outline-secondary"
+                                            style="display: none;">Logout</button>
+                                        <ul class="dropdown-menu dropdown-menu-right mt-2" id="loginDropdown">
+                                            <li class="px-3 py-2">
+                                                <form class="form" role="form">
+                                                    <div class="form-group">
+                                                        <input id="emailInput" placeholder="Username"
+                                                            class="form-control form-control-sm" type="text"
+                                                            required="">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input id="passwordInput" placeholder="Password"
+                                                            class="form-control form-control-sm" type="password"
+                                                            required="">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary btn-block"
+                                                            id="loginBtn">Login</button>
+                                                    </div>
+                                                    <div class="form-group text-center">
+                                                        <small><a href="#" data-toggle="modal"
+                                                                data-target="#modalPassword">Forgot
+                                                                password?</a></small>
+                                                    </div>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                </nav>
+                    </nav>
 
-                <div id="modalPassword" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content modal-color">
-                            <div class="modal-header">
-                                <h3>Forgot password</h3>
-                                <button type="button" class="close font-weight-light" data-dismiss="modal"
-                                    aria-hidden="true">×</button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Reset your password..</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                <button class="btn btn-primary">Save changes</button>
+                    <div id="modalPassword" class="modal fade" tabindex="-1" role="dialog"
+                        aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content modal-color">
+                                <div class="modal-header">
+                                    <h3>Forgot password</h3>
+                                    <button type="button" class="close font-weight-light" data-dismiss="modal"
+                                        aria-hidden="true">×</button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Reset your password..</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                    <button class="btn btn-primary">Save changes</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
 
-    <div class="container-fluid" id="userLogSection">
+        <div class="container-fluid" id="userLogSection">
 
-        <div class="row">
-            <div class="col-12">
-                <form class="jumbotron">
-                    <h2 for="newUser" id="txtsignup">Sign Up</h2>
-                    <div class="alert alert-danger" id="alertMessage" role="alert" style="display: none;">
-                    </div>                    
-                    <img src="assets/bg/user_start.jpg" class="heading-avatar-icon" />
-                    <div class="form-group">
-                        <!-- <label for="userName"> Create Username</label> -->
-                        <input type="text" class="form-control" id="userName" placeholder="Enter Username">
-                        <small id="username" class="form-text text-muted">We'll never share your username with anyone
-                            else.</small>
-                    </div>
-                    <div class="form-group">
-                        <!-- <label for="inputPassword1">Create Password</label> -->
-                        <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
-                        <!-- <label for="inputPassword2">Confirm Password</label> -->
-                        <input type="password" class="form-control" id="inputPassword2" placeholder="Confirm Password">
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="signUpBtn">Login</button>
-                </form>
-            </div>
+            <div class="row">
+                <div class="col-12">
+                    <form class="jumbotron">
+                        <h2 for="newUser" id="txtsignup">Sign Up</h2>
+                        <div class="alert alert-danger" id="alertMessage" role="alert" style="display: none;">
+                        </div>
+                        <img src="assets/bg/user_start.jpg" class="heading-avatar-icon" />
+                        <div class="form-group">
+                            <!-- <label for="userName"> Create Username</label> -->
+                            <input type="text" class="form-control" id="userName" placeholder="Enter Username">
+                            <small id="username" class="form-text text-muted">We'll never share your username with
+                                anyone
+                                else.</small>
+                        </div>
+                        <div class="form-group">
+                            <!-- <label for="inputPassword1">Create Password</label> -->
+                            <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
+                            <!-- <label for="inputPassword2">Confirm Password</label> -->
+                            <input type="password" class="form-control" id="inputPassword2"
+                                placeholder="Confirm Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="signUpBtn">Login</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="container" id="midSection" style="display: none;">
-    <div class="messaging">
-      <div class="inbox_msg">
-        <div class="inbox_people">
-          <div class="headind_srch">
-            <div class="recent_heading">
-              <h4 id="users">&nbsp;</h4>
-            </div>
-            <div class="srch_bar">
-              <div class="stylish-input-group">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>                
-                <input type="text" class="search-bar" id="search-user"  placeholder="Search" >
-                <span class="input-group-addon">
-                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-                </span> </div>
-            </div>
-          </div>
-          <div class="inbox_chat">
-            <div class="chat_list active_chat">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="assets/bg/img_avatar.png" alt="sunil"> </div>
-                <div class="chat_ib">
-                  <h5>Jacky <span class="chat_date">Dec 25</span></h5>
-                  <p>....</p>
+        <div class="messaging">
+            <div class="inbox_msg">
+                <div class="inbox_people">
+                    <div class="headind_srch">
+                        <div class="recent_heading">
+                            <h4 id="users">&nbsp;</h4>
+                        </div>
+                        <div class="srch_bar">
+                            <div class="stylish-input-group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-search">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                                <input type="text" class="search-bar" id="search-user" placeholder="Search">
+                                <span class="input-group-addon">
+                                    <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                                </span> </div>
+                        </div>
+                    </div>
+                    <div class="inbox_chat">
+                        <div class="container-fluid text-center" ">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h1 style="background-color: red">Start a conversation</h1>
+                                    <ul class="list-group" id="userListSection">
+
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="assets/bg/img_avatar.png" alt="sunil"> </div>
-                <div class="chat_ib">
-                  <h5>Devid <span class="chat_date">Dec 25</span></h5>
-                  <p>...</p>
+                <div class="mesgs">
+                    <div class="msg_history" id="msg-content">
+                        <div class="incoming_msg">
+                            <div class="received_msg">
+                                <div class="received_withd_msg" id="message-box">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="imagetmp">
+                        <div id="reviewImg">
+                        </div>
+                    </div>
+                    <div class="type_msg">
+                        <div class="input_msg_write">
+                            <input type="text" class="write_msg" placeholder="Type a keyword..." id="input-msg" />
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="chat_list">
-              <div class="chat_people">
-                <div class="chat_img"> <img src="assets/bg/img_avatar.png" alt="sunil"> </div>
-                <div class="chat_ib">
-                  <h5>Join Deo  <span class="chat_date">Dec 25</span></h5>
-                  <p>...</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-        <div class="mesgs">
-          <div class="msg_history" id="msg-content">
-            <div class="incoming_msg">
-              <div class="received_msg">
-                <div class="received_withd_msg" id="message-box">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="imagetmp">
-            <div id="reviewImg">
-            </div>
-         </div>
-          <div class="type_msg">
-            <div class="input_msg_write">
-              <input type="text" class="write_msg" placeholder="Type a keyword..." id="input-msg"/>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-------- Additional scripts needed, including firebase scripts will go here------->
-    <script type="text/javascript" src="assets/app.js"></script>
+        <!-------- Additional scripts needed, including firebase scripts will go here------->
+        <script type="text/javascript" src="assets/app.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-performance.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-storage.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-performance.js"></script>
 
-    <script>
-        $('#userName').focus();
+        <script>
+            $('#userName').focus();
 
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyDOJvTCcUZzEuqcxfRYKEZnI6O4yE3bK0Y",
-            authDomain: "giphy-messenger.firebaseapp.com",
-            databaseURL: "https://giphy-messenger.firebaseio.com",
-            projectId: "giphy-messenger",
-            storageBucket: "giphy-messenger.appspot.com",
-            messagingSenderId: "364972542348",
-            appId: "1:364972542348:web:824ee9fa42e36fa3"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-    </script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: "AIzaSyDOJvTCcUZzEuqcxfRYKEZnI6O4yE3bK0Y",
+                authDomain: "giphy-messenger.firebaseapp.com",
+                databaseURL: "https://giphy-messenger.firebaseio.com",
+                projectId: "giphy-messenger",
+                storageBucket: "giphy-messenger.appspot.com",
+                messagingSenderId: "364972542348",
+                appId: "1:364972542348:web:824ee9fa42e36fa3"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+        </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 
 
 </body>
