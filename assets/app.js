@@ -158,6 +158,7 @@ function authStateObserver(user) {
     if (user) {
         console.log('hey')
         // User is signed in.
+        displayUserAvailable(user);
         $('#userLogSection').hide();
         $('#midSection').show();
         $('#logoutBtn').show();
@@ -181,7 +182,31 @@ function alertMessage(errorMessage) {
     $('#alertMessage').show();
 }
 
+//functoin to display allUser available to play with
+function displayUserAvailable(user) {
+    var database = firebase.database();
+    var userListRef = database.ref(`userList`)
+    userListRef.orderByChild(`userName`).on(`child_added`, function (data, prevChildKey) {
+        var allOtherUser = data.val();
+        var databaseUsername = allOtherUser.userName;
+        var currentUser = user.email.split('@')[0];
+        if (currentUser != databaseUsername) {
+            var htmlText = `<li class="list-group-item bg-transparent">
+                            <button value="${databaseUsername}" type="button" class="btn btn-outline-secondary btn-lg btn-block playerUserNameBtn" id="allOtherUser-${databaseUsername}">
+                                ${databaseUsername}
+                            </button>
+                        </li>`;
+            $(`#userListSection`).append(htmlText);
+ 
 
+            //LEAVE IT HERE I WILL USE IT LATER ///
+            //setting up a listener on all buttons 
+            // $(`#allOtherUser-${databaseUsername}`).on('click', function () {
+            //     handlePlayerUserNameBtnClick(currentUser, databaseUsername);
+            // })
+        }
+    })
+};
 
 
 function sendGIF(item) {

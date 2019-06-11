@@ -196,7 +196,7 @@ img{ max-width:100%;border-radius: 50%;}
   background:#333336 none repeat scroll 0 0;
   float: left;
   overflow: hidden;
-  width: 40%; border-right:1px solid #c4c4c4;
+  /* width: 40%; border-right:1px solid #c4c4c4; */
   box-shadow: rgba(0, 0, 0, 0.75) -1px 4px 28px 0px;
   border-radius: 0px;
 }
@@ -325,7 +325,7 @@ img{ max-width:100%;border-radius: 50%;}
   position: absolute;
   right: 0;
   top: 11px;
-  width: 33px;
+  width: 400px;
 }
 .messaging { 
     background-color: #212529;
