@@ -129,93 +129,106 @@
     <div class="container" id="midSection" style="display: none;">
         <div class="messaging">
             <div class="inbox_msg">
-                <div class="inbox_people">
-                    <div class="headind_srch">
-                        <div class="recent_heading">
-                            <h4 id="users">&nbsp;</h4>
-                        </div>
-                        <div class="srch_bar">
-                            <div class="stylish-input-group">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-search">
-                                    <circle cx="11" cy="11" r="8"></circle>
-                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                                </svg>
-                                <input type="text" class="search-bar" id="search-user" placeholder="Search">
-                                <span class="input-group-addon">
-                                    <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-                                </span> </div>
+                
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="inbox_people">
+                                <div class="headind_srch">
+                                    <div class="recent_heading">
+                                        <h4 id="users">&nbsp;</h4>
+                                    </div>
+                                    <div class="srch_bar">
+                                        <div class="stylish-input-group">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="feather feather-search">
+                                                <circle cx="11" cy="11" r="8"></circle>
+                                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                            </svg>
+                                            <input type="text" class="search-bar" id="search-user" placeholder="Search">
+                                            <span class="input-group-addon">
+                                                <button type="button"> <i class="fa fa-search" aria-hidden="true"></i>
+                                                </button>
+                                            </span> </div>
+                                    </div>
+                                </div>
+
+                                <div class="inbox_chat">
+                                    <div class="container-fluid text-center" ">
+                            <div class=" row">
+                                        <div class="col-12">
+                                            <h1 style="background-color: red">Start a conversation</h1>
+                                            <ul class="list-group" id="userListSection">
+
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="inbox_chat">
-                        <div class="container-fluid text-center" ">
-                            <div class="row">
-                                <div class="col-12">
-                                    <h1 style="background-color: red">Start a conversation</h1>
-                                    <ul class="list-group" id="userListSection">
-
-                                    </ul>
-
+                    <div class="col-7">
+                        <div class="mesgs">
+                            <div class="msg_history" id="msg-content">
+                                <div class="incoming_msg">
+                                    <div class="received_msg">
+                                        <div class="received_withd_msg" id="message-box">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="imagetmp">
+                                <div id="reviewImg">
+                                </div>
+                            </div>
+                            <div class="type_msg">
+                                <div class="input_msg_write">
+                                    <input type="text" class="write_msg" placeholder="Type a keyword..."
+                                        id="input-msg" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="mesgs">
-                    <div class="msg_history" id="msg-content">
-                        <div class="incoming_msg">
-                            <div class="received_msg">
-                                <div class="received_withd_msg" id="message-box">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="imagetmp">
-                        <div id="reviewImg">
-                        </div>
-                    </div>
-                    <div class="type_msg">
-                        <div class="input_msg_write">
-                            <input type="text" class="write_msg" placeholder="Type a keyword..." id="input-msg" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
-        <!-------- Additional scripts needed, including firebase scripts will go here------->
-        <script type="text/javascript" src="assets/app.js"></script>
+    </div>
+    </div>
+    <!-------- Additional scripts needed, including firebase scripts will go here------->
+    <script type="text/javascript" src="assets/app.js"></script>
 
-        <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-database.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-firestore.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-storage.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-performance.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.0/firebase-performance.js"></script>
 
-        <script>
-            $('#userName').focus();
+    <script>
+        $('#userName').focus();
 
-            // Your web app's Firebase configuration
-            var firebaseConfig = {
-                apiKey: "AIzaSyDOJvTCcUZzEuqcxfRYKEZnI6O4yE3bK0Y",
-                authDomain: "giphy-messenger.firebaseapp.com",
-                databaseURL: "https://giphy-messenger.firebaseio.com",
-                projectId: "giphy-messenger",
-                storageBucket: "giphy-messenger.appspot.com",
-                messagingSenderId: "364972542348",
-                appId: "1:364972542348:web:824ee9fa42e36fa3"
-            };
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-        </script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDOJvTCcUZzEuqcxfRYKEZnI6O4yE3bK0Y",
+            authDomain: "giphy-messenger.firebaseapp.com",
+            databaseURL: "https://giphy-messenger.firebaseio.com",
+            projectId: "giphy-messenger",
+            storageBucket: "giphy-messenger.appspot.com",
+            messagingSenderId: "364972542348",
+            appId: "1:364972542348:web:824ee9fa42e36fa3"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
 
 </body>
