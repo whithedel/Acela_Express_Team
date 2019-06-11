@@ -101,106 +101,105 @@ function handlesignUpBtnClick() {
             }
         }
     }
+};
+//function to handle the form and verify if the form filled properly or not 
+function validateForm(userName, password, password2) {
+    var validForm = true;
+    var alphanumeric = /^[a-zA-Z0-9]+$/
+    if (password !== password2) {
+        validForm = false;
+        alertMessage('Password does not match');
+    }
+    else if (!userName.match(alphanumeric)) {
+        validForm = false;
+        alertMessage('Username can only be alphanumeric');
+    } else if (userName.lenght === 0) {
+        validForm = false;
 
-    //function to handle the form and verify if the form filled properly or not 
-    function validateForm(userName, password, password2) {
-        var validForm = true;
-        var alphanumeric = /^[a-zA-Z0-9]+$/
-        if (password !== password2) {
-            validForm = false;
-            alertMessage('Password does not match');
-        }
-        else if (!userName.match(alphanumeric)) {
-            validForm = false;
-            alertMessage('Username can only be alphanumeric');
-        } else if (userName.lenght === 0) {
-            validForm = false;
+    } else if (password.lenght === 0) {
+        validForm = false;
 
-        } else if (password.lenght === 0) {
-            validForm = false;
-
-        }
-
-        return validForm;
     }
 
+    return validForm;
+};
 
-    //function that allows users to be able to sign in 
-    function signIn() {
-        event.preventDefault()
-        var email = $('#emailInput').val().trim() + '@rhahekel.com';
-        var password = $('#passwordInput').val().trim();
-        console.log(email)
-        firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
-            // Handle Errors here.
-            // var errorCode = error.code;
-            var errorMessage = error.message;
-            alertMessage(errorMessage);
-            // ...
-        });
-        //   $('#loginDropdown').hide();
+
+//function that allows users to be able to sign in 
+function signIn() {
+    event.preventDefault()
+    var email = $('#emailInput').val().trim() + '@rhahekel.com';
+    var password = $('#passwordInput').val().trim();
+    console.log(email)
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+        // Handle Errors here.
+        // var errorCode = error.code;
+        var errorMessage = error.message;
+        alertMessage(errorMessage);
+        // ...
+    });
+    //   $('#loginDropdown').hide();
+}
+
+//function that allows users to be able to sign out
+function signOut() {
+    firebase.auth().signOut().then(function () {
+        // Sign-out successful.
+    }).catch(function (error) {
+        // An error happened.
+        var errorMessage = error.message;
+        alertMessage(errorMessage);
+    });
+    location.reload();
+}
+
+// Triggers when the auth  **user** state change for instance when the user signs-in or signs-out.
+function authStateObserver(user) {
+    if (user) {
+        console.log('hey')
+        // User is signed in.
+        $('#userLogSection').hide();
+        $('#midSection').show();
+        $('#logoutBtn').show();
+        $('#loginDropdown').hide();
+        $('#dropdownMenu1').hide();
+        $('#input-msg').focus();
+    } else {
+        // No user is signed in. user is signout
     }
+};
 
-    //function that allows users to be able to sign out
-    function signOut() {
-        firebase.auth().signOut().then(function () {
-            // Sign-out successful.
-        }).catch(function (error) {
-            // An error happened.
-            var errorMessage = error.message;
-            alertMessage(errorMessage);
-        });
-        location.reload();
-    }
+// Initiate Firebase Auth.
+function initFirebaseAuth() {
+    // Listen to auth **user** state changes.
+    firebase.auth().onAuthStateChanged(authStateObserver);
+}
 
-    // Triggers when the auth  **user** state change for instance when the user signs-in or signs-out.
-    function authStateObserver(user) {
-        if (user) {
-            console.log('hey')
-            // User is signed in.
-            $('#userLogSection').hide();
-            $('#midSection').show();
-            $('#logoutBtn').show();
-            $('#loginDropdown').hide();
-            $('#dropdownMenu1').hide();
-            $('#input-msg').focus();
-        } else {
-            // No user is signed in. user is signout
-        }
-    };
-
-    // Initiate Firebase Auth.
-    function initFirebaseAuth() {
-        // Listen to auth **user** state changes.
-        firebase.auth().onAuthStateChanged(authStateObserver);
-    }
-
-    //function to alert messages when it encounters an error
-    function alertMessage(errorMessage) {
-        $('#alertMessage').html(errorMessage)
-        $('#alertMessage').show();
-    }
+//function to alert messages when it encounters an error
+function alertMessage(errorMessage) {
+    $('#alertMessage').html(errorMessage)
+    $('#alertMessage').show();
+}
 
 
 
 
-    function sendGIF(item) {
-        var src = $(item).attr('src');
-        var imgtag = '<img class="img-msg-item" src="' + src + '" />';
-        var htmlText = '<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">' +
-            imgtag
-            + '</div><div class="flip-card-back"><h1> Im the back</h1></div></div></div>';
-        $('#message-box').append(htmlText);
-        autoScroll();
-    };
+function sendGIF(item) {
+    var src = $(item).attr('src');
+    var imgtag = '<img class="img-msg-item" src="' + src + '" />';
+    var htmlText = '<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">' +
+        imgtag
+        + '</div><div class="flip-card-back"><h1> Im the back</h1></div></div></div>';
+    $('#message-box').append(htmlText);
+    autoScroll();
+};
 
-    function autoScroll() {
-        setTimeout(function () {
-            var cc = $('#msg-content');
-            var dd = cc[0].scrollHeight;
-            cc.animate({
-                scrollTop: dd
-            }, 500);
-        }, 1000);
-    }
-
+function autoScroll() {
+    setTimeout(function () {
+        var cc = $('#msg-content');
+        var dd = cc[0].scrollHeight;
+        cc.animate({
+            scrollTop: dd
+        }, 500);
+    }, 1000);
+}
