@@ -181,7 +181,16 @@ form.jumbotron{
 
 */
 h5{
-    color: white !important;
+    color: white;
+}
+/* GIF Modal CSS changes here*/
+h5.modal-title {
+    color: black;
+}
+
+#gif-preview {
+  display: flex;
+  justify-content: center;
 }
 
 #users, #search-user, #input-msg {
@@ -216,7 +225,7 @@ img{ max-width:100%;border-radius: 50%;}
 .srch_bar {
   display: inline-block;
   text-align: right;
-  width: 60%; padding:
+  width: 60%; 
 }
 .headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;}
 
@@ -384,3 +393,9 @@ img{ max-width:100%;border-radius: 50%;}
     opacity: 0.7;
     transition: 0.3s;
 } 
+
+.message-modal {
+    z-index: 1;
+    background-color: #b97b29;
+    opacity: 0.8;
+}
