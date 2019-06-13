@@ -35,8 +35,15 @@ body
     to { background-position: 100% 0; }
 }
 
-#message-box {
+/*ADDED: Same rules applied to original message-box div work for chat-page classes*/
+#message-box,
+.chat-page {
     margin-top: 5vh;
+}
+
+#message-body {
+  color: rgb(249, 255, 0);
+  background-color: #2980b9;
 }
 
 #gif-choose {
