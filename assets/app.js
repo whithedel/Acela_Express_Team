@@ -1,3 +1,7 @@
+var realname;
+var currentChat = "publicPosts";
+var realemail;
+var curtime;
 $(document).ready(function () {
 
     // initialize Firebase
@@ -18,9 +22,18 @@ $(document).ready(function () {
         testAPI(e);
     });
 
+    $('#action_menu_btn').click(function(){
+        $('.action_menu').toggle();
+    });
 
     $('#msg-content').on('click', function () {
         $('.imagetmp').css("display", "none");
+    });
+
+    $('#gif-message-text').on('keypress',function(e) {
+        if(e.which == 13) {
+            $('#append-gif').click();
+        }
     });
 
     function testAPI(event) {
@@ -67,18 +80,14 @@ $(document).ready(function () {
 
     // $(document).on("click", "#add-gif", testAPI);
     // $(document).on("click", ".gif-thumb", sendGIF);
-
+    
 });
-// Made userName a global variable for message on back of GIFs
-//ADDED: currentChat global variable, used to make buttons and find page to
-// which chat messages are to be appended
- var userName;
- var currentChat = "publicPosts";
+
 
 //function to handlesignUpBtnClick
 function handlesignUpBtnClick() {
     event.preventDefault()
-    userName = $('#userName').val().trim();
+    var userName = $('#userName').val().trim();
     var email = userName + '@rhahekel.com';
     var password = $('#inputPassword1').val().trim();
     var password2 = $('#inputPassword2').val().trim();
@@ -132,7 +141,6 @@ function validateForm(userName, password, password2) {
 //function that allows users to be able to sign in 
 function signIn() {
     event.preventDefault()
-    userName = $('#emailInput').val().trim();
     var email = $('#emailInput').val().trim() + '@rhahekel.com';
     var password = $('#passwordInput').val().trim();
     console.log(email)
@@ -188,8 +196,10 @@ function alertMessage(errorMessage) {
 }
 
 //functoin to display allUser available to play with
-//ADDED: id, values given to button changed so both users are seen on the button
 function displayUserAvailable(user) {
+    var currentUser = user.email.split('@')[0];
+    realname = currentUser;
+    $('#realusername').text(realname);
     var database = firebase.database();
     var userListRef = database.ref(`userList`)
     userListRef.orderByChild(`userName`).on(`child_added`, function (data, prevChildKey) {
@@ -197,11 +207,19 @@ function displayUserAvailable(user) {
         var databaseUsername = allOtherUser.userName;
         var currentUser = user.email.split('@')[0];
         if (currentUser != databaseUsername) {
-            var htmlText = `<li class="list-group-item bg-transparent">
-                            <button value="${databaseUsername} ${userName}" type="button" class="btn btn-outline-secondary btn-lg btn-block playerUserNameBtn" id="allOtherUser-${databaseUsername}">
-                                ${databaseUsername}
-                            </button>
-                        </li>`;
+
+            var htmlText = `<li>
+                            <div class="d-flex bd-highlight click-user" id=${realname}-and-${databaseUsername}>
+                                <div class="img_cont">
+                                    <img src="https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg" class="rounded-circle user_img">
+                                    <span class="online_icon"></span>
+                                </div>
+                                <div class="user_info">
+                                    <span>${databaseUsername}</span>
+                                    <p>${databaseUsername} left - mins ago</p>
+                                </div>
+                            </div>
+                        </li>`;                        
             $(`#userListSection`).append(htmlText);
  
 
@@ -214,49 +232,67 @@ function displayUserAvailable(user) {
     })
 };
 
-// Appending GIFs to page now set-up as two functions: One puts the GIf chosen into the Modal for message input,
-// then the second function occurs when you click on the Send Message button in the modal 
+var sendItem;
 function sendGIF(item) {
+    sendItem = item;
     var src = $(item).attr('src');
     var imgtag = '<img class="img-msg-item" src="' + src + '" />';
-    var htmlText = '<div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">' +
-        imgtag
-        + '</div><div class="flip-card-back"><h3 id="msg-head>...</h3><p id="msg-body"></p></div></div></div>';
+    var htmlText = `<div class="d-flex justify-content-center mb-4">
+                                <div class="msg_container">
+                                   <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">
+                                    ${imgtag}
+                                    </div><div class="flip-card-back"><h1> ... </h1></div></div></div>
+                                    <span class="msg_time">8:40 AM, Today</span>
+                                </div>
+                            </div>`;
+
     $('#gifModal').modal('show');
-    $('#gif-preview').html(htmlText);
+    $('#gif-preview').html(htmlText);   
 };
 
-//ADJUSTED: adds to database now under public and private chat-page data objects
-$(document).on("click", "#append-gif", function appendGIF() {
+function timeNow() {
+  var currentDate = new Date(),
+    h = (currentDate.getHours()<10?'0':'') + currentDate.getHours(),
+    m = (currentDate.getMinutes()<10?'0':'') + currentDate.getMinutes();
+  var date = currentDate.getDate();
+  var month = currentDate.getMonth(); //Be careful! January is 0 not 1
+  var year = currentDate.getFullYear();
+  curtime =curtime = h + ':' + m + '  ' +  year + "-" +(month + 1) + "-" + date;
+}
+
+$('#append-gif').on('click', function(evt) {   
     var hiddenMsg = $("#gif-message-text").val();
-    var gifMsg = $("#gif-preview > .flip-card");
-    var data;
-    $(gifMsg).find("h3").text(userName + " says:");
-    
-    $(gifMsg).find(".flip-card-back").append("<p style='color: rgb(249, 255, 0); background-color: #2980b9;'>" + hiddenMsg + "</p>");
-    data = document.getElementById("gif-preview").innerHTML;
-    console.log(data);
-    //$("#message-box").append(data);
-    firebase.database().ref(currentChat).push(data);
+    var src = $(sendItem).attr('src');
+    timeNow();
+    var imgtag = '<img class="img-msg-item" src="' + src + '" />';
+    var htmlText = `<div class="d-flex justify-content-start mb-4">
+                        <div class="img_cont_msg">
+                            <img src="https://www.freeiconspng.com/uploads/computer-user-icon-16.png" class="rounded-circle user_img_msg">
+                        </div>
+                        <div class="msg_container">
+                            <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front">
+                            ${imgtag}
+                            </div><div class="flip-card-back"><h3> ${realname} says:</h3>
+                            <p style='color: rgb(249, 255, 0); background-color: #2980b9;'>${hiddenMsg}</p>
+                            </div></div></div>
+                            <span class="msg_time mt-3">${curtime}</span>
+                        </div>
+                    </div>`;
+    firebase.database().ref(currentChat).push(htmlText);                          
     $("#gif-message-text").val("");
-    $('#gifModal').modal('hide');
-
+    $('#gifModal').modal('toggle');
     autoScroll();
-})
+});
 
-//ADDED: Function that appends images to the public page, not one-on-one chats
+$(".modal").on('shown.bs.modal', function () {
+    $('#gif-message-text').focus();
+});
+
 firebase.database().ref("publicPosts").on("child_added", function(snapshot) {
     console.log(snapshot.val())
-    $("#message-box").append(snapshot.val());
+    $("#msg-content").append(snapshot.val());
     autoScroll();
-})
-
-
-//INCOMPLETE: Code for making messages append to each individual chat page
-//firebase.database().ref(currentChat).on("child_added", function(chatSnapshot) {
-//    $(".chat-page").append(chatSnapshot.val());
-//    autoScroll();
-//})
+});
 
 function autoScroll() {
     setTimeout(function () {
@@ -268,32 +304,27 @@ function autoScroll() {
     }, 1000);
 }
 
-//ADDED: on click function for chat buttons that create or show chat pages
-//INCOMPLETE: Not yet fully functional. Suspossed to create new pages
-// for individual one-on-one chats
-
-$(document).on("click", ".playerUserNameBtn", function(event) {
+$(document).on("click", ".click-user", function(event) {
     event.preventDefault();
 
-    $("#message-box").hide();
-    currentChat = $(this).val();
-    console.log(currentChat.includes(userName));
-    if (!document.getElementsByClassName(currentChat)) {
-        $(".received_msg").append("<div class='chat-page " + currentChat + "'></div>");
-        $("." + currentChat).show();
-    } else if (document.getElementById(currentChat)) {
+    $("#msg-content").hide();
+    currentChat = $(this).attr("id");
+    console.log(currentChat.includes(realname));
+    if ($(currentChat).length === 0) {
+        $("#outer-msg-body").append("<div class='card-body msg_card_body chat-page' value=" + currentChat + "><h1>Chat between " + currentChat + "</h1></div>");
+        $(".chat-page").val(currentChat).show();
+        $(".chat-page").val(!currentChat).hide();
+    } else if ($(currentChat).length > 0) {
         console.log("already exists!");
-        $("." + currentChat).show();
+        $(".chat-page").val(!currentChat).hide();
     }
 });
-
-//ADDED: allows user to return to public message board/chatroom
 
 $(document).on("click", "#public-chat", function(event) {
     event.preventDefault();
 
     currentChat = "publicPosts";
-    $("#message-box").show();
+    $("#msg-content").show();
     $(".chat-page").hide();
 
 });
