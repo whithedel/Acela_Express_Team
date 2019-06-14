@@ -406,3 +406,14 @@ img{ max-width:100%;border-radius: 50%;}
     background-color: #b97b29;
     opacity: 0.8;
 }
+
+/*CSS FONT LIBRARY: Experimenting with a Google Fonts link*/
+
+.navbar-brand,
+.nav-item {
+    font-family: 'Lobster', cursive;
+}
+
+#username {
+  font-family: 'Kalam', cursive;
+}
