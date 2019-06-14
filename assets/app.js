@@ -199,11 +199,11 @@ function displayUserAvailable(user) {
             $(`#userListSection`).append(htmlText);
  
 
-            //LEAVE IT HERE I WILL USE IT LATER ///
-            //setting up a listener on all buttons 
-            // $(`#allOtherUser-${databaseUsername}`).on('click', function () {
-            //     handlePlayerUserNameBtnClick(currentUser, databaseUsername);
-            // })
+            // LEAVE IT HERE I WILL USE IT LATER ///
+            // setting up a listener on all buttons 
+            $(`#allOtherUser-${databaseUsername}`).on('click', function () {
+                handleUserNameBtnClick(currentUser, databaseUsername);
+            })
         }
     })
 };
@@ -227,4 +227,34 @@ function autoScroll() {
             scrollTop: dd
         }, 500);
     }, 1000);
+}
+
+
+//all the logics for handleUserNameBtnClick that will start a conversation with someone else 
+function handleUserNameBtnClick(currentUser, otherUser) {
+    var p1p2 = currentUser + '+' + otherUser;
+    var p2p1 = otherUser + '+' + currentUser;
+    var namepair = '';
+    chatRoomExist = false;
+    chats = null;
+    var database = firebase.database();
+    var chatRoomRef = database.ref(`chatRoom`);
+    chatRoomRef.once(`value`, function(snapshot){
+        chats = Object.values(snapshot.val())
+        chats.forEach(function (data, index) {
+            namePair = data.namepair;
+            console.log(namePair);
+            if (namePair === p1p2 || namePair === p2p1){
+                chatRoomExist = true;
+                $(`#allOtherUser-${otherUser}`).addClass(`btnColor`);
+            }
+        })
+    }).then(function(){
+        if (!chatRoomExist){
+            chatRoomRef.push({
+                'namepair': `${currentUser}+${otherUser}`,
+                'conversation': 'null',
+            })
+        }
+    })
 }
