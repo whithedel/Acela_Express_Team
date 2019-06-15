@@ -72,8 +72,8 @@ $(document).ready(function () {
 // Made userName a global variable for message on back of GIFs
 //ADDED: currentChat global variable, used to make buttons and find page to
 // which chat messages are to be appended
- var userName;
- var currentChat = "publicPosts";
+var userName;
+var currentChat = "publicPosts";
 
 //function to handlesignUpBtnClick
 function handlesignUpBtnClick() {
@@ -170,6 +170,7 @@ function authStateObserver(user) {
         $('#loginDropdown').hide();
         $('#dropdownMenu1').hide();
         $('#input-msg').focus();
+        handleTheMainBtn(user);
     } else {
         // No user is signed in. user is signout
     }
@@ -198,21 +199,42 @@ function displayUserAvailable(user) {
         var currentUser = user.email.split('@')[0];
         if (currentUser != databaseUsername) {
             var htmlText = `<li class="list-group-item bg-transparent">
-                            <button value="${databaseUsername} ${userName}" type="button" class="btn btn-outline-secondary btn-lg btn-block UserNameBtn" id="allOtherUser-${databaseUsername}">
+                            <button value="${databaseUsername} ${userName}" type="button" class="btn btn-outline-secondary btn-lg btn-block UserNameBtn1" id="allOtherUser-${databaseUsername}">
                                 ${databaseUsername}
                             </button>
                         </li>`;
             $(`#userListSection`).append(htmlText);
- 
+
 
             // LEAVE IT HERE I WILL USE IT LATER ///
             // setting up a listener on all buttons 
-            $(`#allOtherUser-${databaseUsername}`).on('click', function () {
-                handleUserNameBtnClick(currentUser, databaseUsername);
-            })
+            // $(`#allOtherUser-${databaseUsername}`).on('click', function () {
+            //     console.log('123456777fdsgfdg')
+            //     handleUserNameBtnClick(currentUser, databaseUsername);
+            // })
         }
     })
 };
+
+//function that will handle the function handle usernamebtbclcik
+function handleTheMainBtn(user){
+    var currentUser = user.email.split('@')[0];
+    var userListRef = firebase.database().ref(`userList`)
+    userListRef.on(`value`,function(snapshot){
+        console.log(Object.values(snapshot.val()));
+        data = Object.values(snapshot.val())
+        data.forEach(function (data){
+            var databaseUsername = data.userName;
+            if(currentUser != databaseUsername){
+                $(document).on('click',`#allOtherUser-${databaseUsername}`, function () {
+                    console.log('123456777fdsgfdg')
+                    handleUserNameBtnClick(currentUser, databaseUsername);
+                }) 
+            }
+
+        })
+    })
+}
 
 // Appending GIFs to page now set-up as two functions: One puts the GIf chosen into the Modal for message input,
 // then the second function occurs when you click on the Send Message button in the modal 
@@ -232,7 +254,7 @@ $(document).on("click", "#append-gif", function appendGIF() {
     var gifMsg = $("#gif-preview > .flip-card");
     var data;
     $(gifMsg).find("h3").text(userName + " says:");
-    
+
     $(gifMsg).find(".flip-card-back").append("<p style='color: rgb(249, 255, 0); background-color: #2980b9;'>" + hiddenMsg + "</p>");
     data = document.getElementById("gif-preview").innerHTML;
     console.log(data);
@@ -245,8 +267,8 @@ $(document).on("click", "#append-gif", function appendGIF() {
 })
 
 //ADDED: Function that appends images to the public page, not one-on-one chats
-firebase.database().ref("publicPosts").on("child_added", function(snapshot) {
-    console.log(snapshot.val())
+firebase.database().ref("publicPosts").on("child_added", function (snapshot) {
+    // console.log(snapshot.val())
     $("#message-box").append(snapshot.val());
     autoScroll();
 })
@@ -265,10 +287,12 @@ function autoScroll() {
 
 //all the logics for handleUserNameBtnClick that will start a conversation with someone else 
 function handleUserNameBtnClick(currentUser, otherUser) {
+    console.log('im handlebtnusernameclick')
     appendSendBtn(currentUser,otherUser);
-    $(document).on(`click`,`#${currentUser+otherUser}`,function(){
-        sendMessageToDatabase(currentUser,otherUser)
-    })
+    // $(document).on(`click`, `#${currentUser+otherUser}`, function () {
+    //     console.log('im the on click btn')
+    //     sendMessageToDatabase(currentUser,otherUser)
+    // })
     var p1p2 = currentUser + '+' + otherUser;
     var p2p1 = otherUser + '+' + currentUser;
     var namepair = '';
@@ -276,81 +300,110 @@ function handleUserNameBtnClick(currentUser, otherUser) {
     chats = null;
     var database = firebase.database();
     var chatRoomRef = database.ref(`chatRoom`);
-    chatRoomRef.once(`value`, function(snapshot){
+    chatRoomRef.once(`value`, function (snapshot) {
         chats = Object.values(snapshot.val())
         chats.forEach(function (data) {
             namePair = data.namepair;
             console.log(namePair);
-            if (namePair === p1p2 || namePair === p2p1){
+            if (namePair === p1p2 || namePair === p2p1) {
                 chatRoomExist = true;
-                highlightUserNameButton(otherUser);
+                $(document).on(`click`, `#${currentUser+otherUser}`, function () {
+                    console.log('im the on click btn')
+                    sendMessageToDatabase(currentUser,otherUser)
+                })
+                // loadMessages(currentUser, otherUser);
+                //highlightUserNameButton(otherUser);
             }
         })
-    }).then(function(){
-        if (!chatRoomExist){
+    }).then(function () {
+        if (!chatRoomExist) {
+            $(document).on(`click`, `#${currentUser+otherUser}`, function () {
+                console.log('im the on click btn')
+                sendMessageToDatabase(currentUser,otherUser)
+            })
             var newPostKey = firebase.database().ref().child('conversation').push().key;
             chatRoomRef.push({
                 'namepair': `${currentUser}+${otherUser}`,
-                'conversation':'null'      
-            }).then(function(){
+                'conversation': 'null'
+            }).then(function () {
                 var chatRoomKey = findChatRoomKey(currentUser, otherUser);
                 // var conversationRef = firebase.database().ref(`chatRoom/${chatRoomKey}/conversation`);
-                sender(chatRoomKey).then(function(){
-                         loadMessages(currentUser, otherUser);
-                
-                
+                sender(chatRoomKey).then(function () {
+                    // loadMessages(currentUser, otherUser);
                 })
-               
             })
-            highlightUserNameButton(otherUser);
-            
-        } else {
-            loadMessages(currentUser, otherUser);
-            console.log(`im called`)
-        }
         
+        }
+        loadMessages(currentUser, otherUser);
+        highlightUserNameButton(otherUser);
     })
 }
 
 //function that will load all messages from the database 
-function loadMessages(currentUser, otherUser){
+function loadMessages(currentUser, otherUser) {
+    $(`#message-box`).empty()
     var chatRoomKey = findChatRoomKey(currentUser, otherUser);
     var conversationRef = firebase.database().ref(`chatRoom/${chatRoomKey}/conversation`);
-    conversationRef.orderByChild(`time`).on(`child_added`, function (data){
-        console.log(data.val())
+    conversationRef.on(`child_added`, function (data) {
+        data = data.val();
+        var gif = `<img class="img-msg-item" src="${data.url}" />`;
+        var htmlText =`
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img class="img-msg-item" src="${data.url}">
+                </div>
+                <div class="flip-card-back">
+                    <h3 id="msg-head">${data.author} says:</h3>
+                 <p id="msg-body"></p>
+                    <p style="color: rgb(249, 255, 0); background-color: #2980b9;">${data.message}</p>
+                </div>
+            </div>
+        </div>`
+
+
+        if (data.url != 'null') {
+            
+            $(`#message-box`).append(htmlText);
+            $(`#message-box`).show();
+            autoScroll();
+        }
+            
     })
+    autoScroll();
 }
 
 //function to create the object of a sender 
-function sender(chatRoomKey, username = 'null', url= 'null', message='null', time=0) {
+function sender(chatRoomKey, username = 'null', url = 'null', message = 'null', time = 0) {
     // A post entry.
+    console.log('im sender function')
     var conversation = {
-      author: username,
-      url: url,
-      message: message,
-      time: time,
+        author: username,
+        url: url,
+        message: message,
+        time: time,
     };
-  // Get a key for a new Post.
-  var newPostKey = firebase.database().ref().child(`chatRoom/${chatRoomKey}/conversation`).push().key;
+    // Get a key for a new Post.
+    var newPostKey = firebase.database().ref().child(`chatRoom/${chatRoomKey}/conversation`).push().key;
 
-  // Write the new post's data simultaneously in the posts list and the user's post list.
-  var updates = {};
-  updates[`chatRoom/${chatRoomKey}/conversation/` + newPostKey] = conversation;
-  
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+    updates[`chatRoom/${chatRoomKey}/conversation/` + newPostKey] = conversation;
 
-  return firebase.database().ref().update(updates);
+
+    return firebase.database().ref().update(updates);
 }
 
 //function to find chatRoom key 
-function findChatRoomKey(currentUser, otherUser){
+function findChatRoomKey(currentUser, otherUser) {
     var returnKey = ``;
     var database = firebase.database();
     var chatRoomRef = database.ref(`chatRoom`)
     var p1p2 = currentUser + '+' + otherUser;
     var p2p1 = otherUser + '+' + currentUser;
-    chatRoomRef.on(`value`,function(snapshot){
+    chatRoomRef.on(`value`, function (snapshot) {
         var chats = Object.entries(snapshot.val());
-        chats.forEach(function(data,index){
+        chats.forEach(function (data, index) {
             var rooms = data[1];
             var namePair = rooms.namepair;
             if (namePair === p1p2 || namePair === p2p1) {
@@ -364,17 +417,17 @@ function findChatRoomKey(currentUser, otherUser){
 
 
 function highlightUserNameButton(otherUser) {
-    $(`.UserNameBtn`).removeClass('btnColor');
+    $(`.UserNameBtn1`).removeClass('btnColor');
     $(`#allOtherUser-${otherUser}`).addClass('btnColor');
 }
 //ADDED: on click function for chat buttons that create or show chat pages
 //INCOMPLETE: Not yet fully functional. Suspossed to create new pages
 // for individual one-on-one chats
 
-$(document).on("click", ".UserNameBtn", function(event) {
+$(document).on("click", ".UserNameBtn", function (event) {
     event.preventDefault();
 
-    $("#message-box").hide();
+    // $("#message-box").hide();
     currentChat = $(this).val();
     console.log(currentChat.includes(userName));
     if (!document.getElementsByClassName(currentChat)) {
@@ -387,26 +440,28 @@ $(document).on("click", ".UserNameBtn", function(event) {
 });
 
 //append send button pertaining to a specific sender 
-function appendSendBtn(currentUser,otherUser){
+function appendSendBtn(currentUser, otherUser) {
     $(`#append-gif`).hide();
-    var button = `<button type="button" id="${currentUser+otherUser}" class="btn btn-primary privateBtn">Send</button>`
-    $(`.modal-footer`).append(button)
+    $(`.privateButton`).empty();
+    var button = `<button type="button" id="${currentUser + otherUser}" class="btn btn-primary privateBtn">Send</button>`
+    $(`.privateButton`).append(button)
 }
 
 
 // send messages to firebase  
-function sendMessageToDatabase(currentUser,otherUser){
+function sendMessageToDatabase(currentUser, otherUser) {
+    console.log('im sendmessagetodatabase')
     var chatRoomKey = findChatRoomKey(currentUser, otherUser)
     var username = currentUser
     var url = $(`.img-msg-item`).attr(`src`);
-    var message =$(`#gif-message-text`).val();
+    var message = $(`#gif-message-text`).val();
     var time = 0
-    sender(chatRoomKey, username , url, message, time)   
+    sender(chatRoomKey, username, url, message, time)
 }
 
 
 //ADDED: allows user to return to public message board/chatroom
-$(document).on("click", "#public-chat", function(event) {
+$(document).on("click", "#public-chat", function (event) {
     event.preventDefault();
 
     currentChat = "publicPosts";
