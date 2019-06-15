@@ -199,7 +199,7 @@ function displayUserAvailable(user) {
         var currentUser = user.email.split('@')[0];
         if (currentUser != databaseUsername) {
             var htmlText = `<li class="list-group-item bg-transparent">
-                            <button value="${databaseUsername} ${userName}" type="button" class="btn btn-outline-secondary btn-lg btn-block UserNameBtn1" id="allOtherUser-${databaseUsername}">
+                            <button value="${databaseUsername} ${userName}" type="button" class="btn btn-outline-secondary btn-lg btn-block UserNameBtn1 UserNameBtn" id="allOtherUser-${databaseUsername}">
                                 ${databaseUsername}
                             </button>
                         </li>`;
