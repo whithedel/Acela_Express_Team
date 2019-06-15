@@ -35,8 +35,15 @@ body
     to { background-position: 100% 0; }
 }
 
-#message-box {
+/*ADDED: Same rules applied to original message-box div work for chat-page classes*/
+#message-box,
+.chat-page {
     margin-top: 5vh;
+}
+
+#message-body {
+  color: rgb(249, 255, 0);
+  background-color: #2980b9;
 }
 
 #gif-choose {
@@ -181,7 +188,16 @@ form.jumbotron{
 
 */
 h5{
-    color: white !important;
+    color: white;
+}
+/* GIF Modal CSS changes here*/
+h5.modal-title {
+    color: black;
+}
+
+#gif-preview {
+  display: flex;
+  justify-content: center;
 }
 
 #users, #search-user, #input-msg {
@@ -385,3 +401,23 @@ img{ max-width:100%;border-radius: 50%;}
     transition: 0.3s;
 } 
 
+.message-modal {
+    z-index: 1;
+    background-color: #b97b29;
+    opacity: 0.8;
+}
+
+/*CSS FONT LIBRARY: Experimenting with a Google Fonts link*/
+
+.navbar-brand,
+.nav-item {
+    font-family: 'Lobster', cursive;
+}
+
+#username {
+  font-family: 'Kalam', cursive;
+}
+
+.btnColor {
+  background-color: lightblue !important;
+}
